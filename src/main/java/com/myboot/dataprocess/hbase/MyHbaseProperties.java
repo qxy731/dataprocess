@@ -13,15 +13,21 @@ import org.springframework.stereotype.Component;
 import com.myboot.dataprocess.DataprocessApplication;
 
 import lombok.Data;
-import lombok.extern.log4j.Log4j2;
-
+import lombok.extern.slf4j.Slf4j;
+/** 
+*
+* @ClassName ：MyHbaseProperties 
+* @Description ： 属性文件实体类
+* @author ：PeterQi
+*
+*/
 @Data
 @Primary
 @Component
-@Log4j2
+@Slf4j
 @ConfigurationProperties(prefix = "hbase",ignoreUnknownFields=true,ignoreInvalidFields=true)
-@PropertySource(value={"classpath:config/hbase.properties"},ignoreResourceNotFound=false,encoding="UTF-8",name="MyHBaseProperties")
-public class MyHBaseProperties {
+@PropertySource(value={"classpath:config/hbase.properties"},ignoreResourceNotFound=false,encoding="UTF-8",name="myHbaseProperties")
+public class MyHbaseProperties {
 	
 	private Map<String,String> config;
 	
@@ -38,26 +44,30 @@ public class MyHBaseProperties {
 	
 	 public static void main(String[] args) {
 			ConfigurableApplicationContext context = SpringApplication.run(DataprocessApplication.class, args);
-			MyHBaseProperties myHBaseProperties = context.getBean(MyHBaseProperties.class);
-			if(myHBaseProperties == null) {
-				log.info("myHBaseProperties is null....");
+			MyHbaseProperties myHbaseProperties = context.getBean(MyHbaseProperties.class);
+			if(myHbaseProperties == null) {
+				log.info("myHbaseProperties is null....");
 			}
-			log.info(myHBaseProperties);
-			Map<String,String> config  = myHBaseProperties.getConfig();
+			//log.info(myHbaseProperties);
+			Map<String,String> config  = myHbaseProperties.getConfig();
 			if(config == null) {
 				log.info("config is null....");
 			}
 			Set<String> configKeySet = config.keySet();
 	        for (String key : configKeySet) {
+	        	log.info("=============================");
 	        	log.info(key + ":" + config.get(key));
+	        	log.info("=============================");
 	        }
-	        Map<String,String> other  = myHBaseProperties.getOther();
+	        Map<String,String> other  = myHbaseProperties.getOther();
 			if(other == null) {
 				log.info("other is null....");
 			}
 			Set<String> otherKeySet = other.keySet();
 	        for (String key : otherKeySet) {
+	        	log.info("=============================");
 	        	log.info(key + ":" + other.get(key));
+	        	log.info("=============================");
 	        }
 		}
     

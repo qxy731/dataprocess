@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.8.RELEASE</version>
+		<version>1.5.22.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.myboot</groupId>
@@ -15,6 +15,7 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
+		 <slf4j.version>1.7.26</slf4j.version>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Greenwich.SR3</spring-cloud.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -82,20 +83,75 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-zookeeper-config</artifactId>
 		</dependency> -->
-		<!-- <dependency>
+		 <!-- kafka -->
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_${scala.binary.version}</artifactId>
+            <version>${kafka.version}</version>
+            <exclusions>
+			   <exclusion>
+			      <groupId>org.springframework.boot</groupId>
+			      <artifactId>spring-boot-starter-logging</artifactId>
+			   </exclusion>
+			   <exclusion>
+			      <groupId>org.slf4j</groupId>
+			      <artifactId>slf4j-log4j12</artifactId>
+			   </exclusion>
+			   <exclusion>
+			      <groupId>log4j</groupId>
+			      <artifactId>log4j</artifactId>
+			   </exclusion>
+			</exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>${kafka.version}</version>
+            <exclusions>
+			   <exclusion>
+			      <groupId>org.springframework.boot</groupId>
+			      <artifactId>spring-boot-starter-logging</artifactId>
+			   </exclusion>
+			   <exclusion>
+			      <groupId>org.slf4j</groupId>
+			      <artifactId>slf4j-log4j12</artifactId>
+			   </exclusion>
+			   <exclusion>
+			      <groupId>log4j</groupId>
+			      <artifactId>log4j</artifactId>
+			   </exclusion>
+			</exclusions>
+        </dependency>
+        
+		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
-		</dependency> -->
-
-		<!-- <dependency>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka-test</artifactId>
 			<scope>test</scope>
-		</dependency> -->
+		</dependency>
 		 <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-server</artifactId>
             <version>${hbase.version}</version>
+            <exclusions>
+			   <exclusion>
+			      <groupId>org.springframework.boot</groupId>
+			      <artifactId>spring-boot-starter-logging</artifactId>
+			   </exclusion>
+			   <exclusion>
+			      <groupId>org.slf4j</groupId>
+			      <artifactId>slf4j-log4j12</artifactId>
+			   </exclusion>
+			   <exclusion>
+			      <groupId>log4j</groupId>
+			      <artifactId>log4j</artifactId>
+			   </exclusion>
+			</exclusions>
         </dependency>
 		<dependency>
             <groupId>org.apache.hbase</groupId>
@@ -111,11 +167,39 @@
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
             <version>${hadoop.version}</version>
+            <exclusions>
+			   <exclusion>
+			      <groupId>org.springframework.boot</groupId>
+			      <artifactId>spring-boot-starter-logging</artifactId>
+			   </exclusion>
+			   <exclusion>
+			      <groupId>org.slf4j</groupId>
+			      <artifactId>slf4j-log4j12</artifactId>
+			   </exclusion>
+			   <exclusion>
+			      <groupId>log4j</groupId>
+			      <artifactId>log4j</artifactId>
+			   </exclusion>
+			</exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
             <version>${hadoop.version}</version>
+            <exclusions>
+			   <exclusion>
+			      <groupId>org.springframework.boot</groupId>
+			      <artifactId>spring-boot-starter-logging</artifactId>
+			   </exclusion>
+			   <exclusion>
+			      <groupId>org.slf4j</groupId>
+			      <artifactId>slf4j-log4j12</artifactId>
+			   </exclusion>
+			   <exclusion>
+			      <groupId>log4j</groupId>
+			      <artifactId>log4j</artifactId>
+			   </exclusion>
+			</exclusions>
         </dependency>
         
         <dependency>
@@ -123,12 +207,36 @@
             <artifactId>zookeeper</artifactId>
             <version>${zookeeper.version}</version>
             <type>pom</type>
+            <exclusions>
+			   <exclusion>
+			      <groupId>org.springframework.boot</groupId>
+			      <artifactId>spring-boot-starter-logging</artifactId>
+			   </exclusion>
+			   <exclusion>
+			      <groupId>org.slf4j</groupId>
+			      <artifactId>slf4j-log4j12</artifactId>
+			   </exclusion>
+			   <exclusion>
+			      <groupId>log4j</groupId>
+			      <artifactId>log4j</artifactId>
+			   </exclusion>
+			</exclusions>
         </dependency>
         
         <!-- <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_${scala.binary.version}</artifactId>
             <version>${spark.version}</version>
+            <exclusions>
+            	<exclusion>
+            		<groupId>org.slf4j</groupId>
+            		<artifactId>slf4j-log4j12</artifactId>
+            	</exclusion>
+            	<exclusion>
+            		<groupId>log4j</groupId>
+            		<artifactId>log4j</artifactId>
+            	</exclusion>
+            </exclusions>
         </dependency>
 		 <dependency>
             <groupId>org.apache.spark</groupId>
@@ -152,7 +260,15 @@
             <scope>provided</scope>
         </dependency>
         
-       
+        <!-- <dependency> 
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency> -->
+ 		
+ 		<dependency>
+		   <groupId>com.jayway.jsonpath</groupId>
+		   <artifactId>json-path</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -169,6 +285,20 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
                 <version>2.6.1</version>
+                <exclusions>
+			   <exclusion>
+			      <groupId>org.springframework.boot</groupId>
+			      <artifactId>spring-boot-starter-logging</artifactId>
+			   </exclusion>
+			   <exclusion>
+			      <groupId>org.slf4j</groupId>
+			      <artifactId>slf4j-log4j12</artifactId>
+			   </exclusion>
+			   <exclusion>
+			      <groupId>log4j</groupId>
+			      <artifactId>log4j</artifactId>
+			   </exclusion>
+			</exclusions>
             </dependency>
 
             <dependency>

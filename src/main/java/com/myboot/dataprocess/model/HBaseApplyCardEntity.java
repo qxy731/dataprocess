@@ -14,6 +14,7 @@ public class HBaseApplyCardEntity {
 	
 	@ApiModelProperty(value = "申请编号", required = true)
     private String applicationNumber;	//申请编号
+	@ApiModelProperty(value = "申请编号", required = true)
     private String captureDate; //获取数据日期	Date
     private String captureTime; //获取数据时间	Numeric
     private String axpiryDate; //中止日期	Date
@@ -24,7 +25,7 @@ public class HBaseApplyCardEntity {
     private String decision;  //处理结果	Text
     private String decisionReason;  //处理原因	Text
     private String decisionDate;   //处理日期	Date
-    private String dertificateID;  //Id Num 证件号码	Text
+    private String certificateID;  //Id Num 证件号码	Text
     private String certificateType;   //Id Type 证件种类	Text
     private String surname;  //	Full Name 主卡姓名	Text
     private String firstName;  //	NameonCard 压花名	Text
