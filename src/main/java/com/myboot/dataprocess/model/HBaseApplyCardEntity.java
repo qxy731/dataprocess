@@ -17,7 +17,7 @@ public class HBaseApplyCardEntity {
 	@ApiModelProperty(value = "申请编号", required = true)
     private String captureDate; //获取数据日期	Date
     private String captureTime; //获取数据时间	Numeric
-    private String axpiryDate; //中止日期	Date
+    private String expiryDate; //中止日期	Date
     private String applicationDate; //申请日	Date
     private String applicationType; //申请类型	Text
     private String amount; //信用额度	Numeric

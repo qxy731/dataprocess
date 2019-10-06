@@ -70,7 +70,7 @@ public class MyHbaseProcessRepository {
 	public void create(String namespace,String tableName,String columnFamily) throws IOException{
 		log.info("---------------创建表 START-----------------");
 		Admin admin = connection.getAdmin();
-		admin.createNamespace(NamespaceDescriptor.create(namespace).build());
+		//admin.createNamespace(NamespaceDescriptor.create(namespace).build());
 		//新建一个数据表表名对象
 		TableName tn = TableName.valueOf(tableName);
 		//判断表是否存在

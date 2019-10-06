@@ -57,7 +57,7 @@ public class HbaseProcessControllerTest {
     @Test
     public void testSave() throws Exception {
     	//同HbaseProcessServiceImplTest#testSave()方法，请先测试HbaseProcessServiceImplTest#testSave()
-    	int total = 10000;
+    	int total = 100;
 		String startDate = "2019-09-01";
 		String endDate = "2019-10-07";
 		String url = this.base.toString() + "/dataprocess/hbase/save?total="+total+"&startDate="+startDate+"&endDate="+endDate;

@@ -6,7 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.myboot.dataprocess.util.DataProcessUtil;
+import com.myboot.dataprocess.util.CommonUtil;
+import com.myboot.dataprocess.util.DataModelUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -64,7 +65,7 @@ public class HbaseProcessServiceImpl implements HbaseProcessService {
 	public void save(int total, String startDate, String endDate) throws Exception {
 		String tableName =  myHbaseConfiguration.getOtherParameter("tablename");
 		String columnFamily = myHbaseConfiguration.getOtherParameter("columnFamily");
-		int days = DataProcessUtil.betweenDay(startDate, endDate);
+		int days = CommonUtil.betweenDay(startDate, endDate);
 		int dayTotal = total/days;
 		int modTotal = total%days;
 		String currentDay = startDate;
@@ -84,10 +85,10 @@ public class HbaseProcessServiceImpl implements HbaseProcessService {
 				if(i == length-1 && mod != 0) {
 					count = mod;
 				}
-				Map<String,Object> map = DataProcessUtil.assembleData(count,currentDay);
+				Map<String,Object> map = DataModelUtil.assembleData(count,currentDay);
 				hbaseRepository.insert(tableName,columnFamily,map);
 			}
-			currentDay = DataProcessUtil.addDay(currentDay);
+			currentDay = CommonUtil.addDay(currentDay,1);
 		}
 	}
 	
