@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.hbase.Cell;
 import org.apache.hadoop.hbase.CellUtil;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
-import org.apache.hadoop.hbase.NamespaceDescriptor;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Admin;
 import org.apache.hadoop.hbase.client.Connection;
@@ -39,7 +39,7 @@ public class MyHbaseProcessRepository {
     @Autowired
     private MyHbaseConfiguration myHbaseConfiguration;
 	
-    private Connection connection = null;
+    private static Connection connection = null;
     
     /**
      * 获取连接
@@ -87,7 +87,13 @@ public class MyHbaseProcessRepository {
 				tbDescriptor.addFamily(f1);
 			}
 			//新建数据表
-			admin.createTable(tbDescriptor);
+			//admin.createTable(tbDescriptor);
+			String[] splitArray = "10|20|30|40|50|60|70|80|90".split("|");
+			byte[][] splitKeys = new byte[splitArray.length][];
+			for(int i=0;i<splitArray.length;i++) {
+				splitKeys[i] = Bytes.toBytes(splitArray[i]);
+			}
+			admin.createTable(tbDescriptor,splitKeys);
 			admin.close();
 			log.info(tableName+"表创建成功！");
 		}
@@ -182,6 +188,7 @@ public class MyHbaseProcessRepository {
 		Put put = new Put(Bytes.toBytes(rowkey));
 		for(int i = 0; i < cloumn.length; i++) {
 			put.addColumn(Bytes.toBytes(columnFamily[i]), Bytes.toBytes(cloumn[i]), Bytes.toBytes(columnText[i]));
+			//put.addC
 		}
 		table.put(put);
 		table.close();
@@ -220,10 +227,13 @@ public class MyHbaseProcessRepository {
 		Table table = connection.getTable(TableName.valueOf(tableName));
 		//单条插入
 		List<Put> list = new ArrayList<Put>();
+		int rowcount  = 0;
 		for (Map.Entry<String,Object> entry : map.entrySet()) {
 			String rowkey = entry.getKey();
 			Object object = entry.getValue();
+			log.info("{rowcount="+rowcount+",rowkey="+rowkey+",{columnFamily="+columnFamily+"&Object={"+object+"}}");
 			Put put = new Put(Bytes.toBytes(rowkey));
+			//int fieldcount = 0;
 			//获取实体类的所有属性，返回Field数组
 			Field[] fields = object.getClass().getDeclaredFields(); 
 			  for(int i = 0;i < fields.length; i ++){
@@ -236,11 +246,16 @@ public class MyHbaseProcessRepository {
 				   String columnText = (String)f.get(object);
 				   //得到对应字段的类型
 				   //Type type = f.getGenericType();
-				   put.addColumn(Bytes.toBytes(columnFamily), Bytes.toBytes(column), Bytes.toBytes(columnText));
+				   //log.info("{rowcount="+rowcount+",fieldcount="+fieldcount+",rowkey="+rowkey+",{columnFamily="+columnFamily+"&column="+column+"&columnText="+columnText+"}}");
+				   if(StringUtils.isNotBlank(columnText)&&StringUtils.isNotBlank(column)) {
+					   put.addColumn(Bytes.toBytes(columnFamily), Bytes.toBytes(column), Bytes.toBytes(columnText));
+				   }
 				   if(i == fields.length-1) {
 					   list.add(put);
 				   }
+				   //fieldcount++;
 			  }
+			  rowcount++;
 		}
 		table.put(list);
 		table.close();

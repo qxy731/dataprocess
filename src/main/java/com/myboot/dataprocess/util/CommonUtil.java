@@ -4,8 +4,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Random;
 
+import com.myboot.dataprocess.hbase.HbaseDataModelProcess;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class CommonUtil {
 	
 	/**
@@ -99,7 +103,7 @@ public class CommonUtil {
         if(second < 10) {
         	s = "0" + s;
         }
-        String ret = h + "-" + m + "-" + s;
+        String ret = h +":"+ m +":"+ s;
         return ret;
 	}
 	
@@ -116,6 +120,39 @@ public class CommonUtil {
 		//System.out.println(getRangeRandom2Str(3000,100000));
 		//System.out.println(getRandomChar(10));
 		System.out.println(getBirthByCertNo("370826198410252516"));
+		String startDate = "2019-04-01";
+		String endDate = "2019-10-07";
+		int days = CommonUtil.betweenDay(startDate, endDate);
+		System.out.println(days);
+		int total = 1000000;
+		int dayTotal = total/days;
+		int modTotal = total%days;
+		int countsum = 0;
+		String currentDate = startDate;
+		for(int d = 0; d < days; d++) {
+			if(d == days - 1 && modTotal != 0 ) {
+				dayTotal = dayTotal + modTotal;
+			}
+			int count = 10000;
+			int length = dayTotal/count;
+			int mod = dayTotal % count;
+			if(mod != 0 ) {
+				length = length+1;
+			}
+			for(int i=0;i<length;i++) {
+				if(i == length-1 && mod != 0) {
+					count = mod;
+					log.info("count="+count);
+				}
+				log.info("========================insert start==================================");
+				log.info("betweenDay:"+days+"&dayTotal:"+dayTotal+"&modTotal:"+modTotal+"&currentDate:"+currentDate+"&count:"+count+"&length:"+length+"&mod:"+mod);
+				HbaseDataModelProcess.assembleHbaseData(count,currentDate);
+				log.info("========================insert end====================================");
+				countsum += count;
+			}
+			currentDate = CommonUtil.addDay(currentDate,1);
+		}
+		log.info("countsum="+countsum);
 	}
 
 }
