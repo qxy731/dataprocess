@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.myboot.dataprocess.DataprocessApplication;
+import com.myboot.dataprocess.kafka.common.MyKafkaConfiguration;
+import com.myboot.dataprocess.kafka.producer.MyKafkaProducerServiceImpl;
 
 
 @RunWith(SpringRunner.class)

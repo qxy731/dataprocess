@@ -1,4 +1,4 @@
-package com.myboot.dataprocess.hbase;
+package com.myboot.dataprocess.hbase.common;
 
 import java.util.HashMap;
 import java.util.Map;

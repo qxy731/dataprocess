@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.myboot.dataprocess.hbase.common.HbaseDataModelProcess;
+import com.myboot.dataprocess.hbase.common.MyHbaseConfiguration;
 import com.myboot.dataprocess.util.CommonUtil;
 
 import lombok.extern.slf4j.Slf4j;

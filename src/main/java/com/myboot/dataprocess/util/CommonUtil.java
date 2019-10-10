@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.myboot.dataprocess.hbase.HbaseDataModelProcess;
+import com.myboot.dataprocess.hbase.common.HbaseDataModelProcess;
 
 import lombok.extern.slf4j.Slf4j;
 

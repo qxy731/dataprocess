@@ -1,4 +1,4 @@
-package com.myboot.dataprocess.kafka;
+package com.myboot.dataprocess.kafka.consumer;
 
 import java.util.HashMap;
 import java.util.Map;

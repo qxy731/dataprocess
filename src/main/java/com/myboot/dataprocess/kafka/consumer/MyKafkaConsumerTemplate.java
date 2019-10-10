@@ -1,4 +1,4 @@
-package com.myboot.dataprocess.kafka;
+package com.myboot.dataprocess.kafka.consumer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +12,8 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import org.springframework.stereotype.Component;
+
+import com.myboot.dataprocess.kafka.common.MyKafkaConfiguration;
 
 import lombok.extern.slf4j.Slf4j;
 

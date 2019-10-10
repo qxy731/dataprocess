@@ -1,4 +1,4 @@
-package com.myboot.dataprocess.kafka;
+package com.myboot.dataprocess.kafka.producer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +10,8 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.stereotype.Component;
+
+import com.myboot.dataprocess.kafka.common.MyKafkaConfiguration;
 
 @Component
 @EnableKafka

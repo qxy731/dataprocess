@@ -1,10 +1,11 @@
-package com.myboot.dataprocess.kafka;
+package com.myboot.dataprocess.kafka.producer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
+import com.myboot.dataprocess.kafka.common.KafkaDataModelProcess;
 import com.myboot.dataprocess.model.KafkaApplyCardEntity;
 
 import lombok.extern.slf4j.Slf4j;

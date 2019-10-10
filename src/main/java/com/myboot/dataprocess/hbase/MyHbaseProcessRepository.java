@@ -24,6 +24,8 @@ import org.apache.hadoop.hbase.util.Bytes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.myboot.dataprocess.hbase.common.MyHbaseConfiguration;
+
 import lombok.extern.slf4j.Slf4j;
 /** 
 *
