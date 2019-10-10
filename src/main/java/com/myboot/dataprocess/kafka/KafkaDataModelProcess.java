@@ -1,5 +1,8 @@
 package com.myboot.dataprocess.kafka;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.myboot.dataprocess.model.ApplyCardEntity;
 import com.myboot.dataprocess.model.KafkaApplyCardEntity;
 import com.myboot.dataprocess.model.ProtocolEntity;
@@ -7,16 +10,20 @@ import com.myboot.dataprocess.model.SchemaEntity;
 import com.myboot.dataprocess.util.RandomDataModelBuilder;
 import com.myboot.dataprocess.util.RowkeyGenerator;
 
+@Component
 public class KafkaDataModelProcess {
 	
-	public static KafkaApplyCardEntity assembleKafkaData(String currentDate) {
+	@Autowired
+	private MyKafkaConfiguration myKafkaProducerConfig;
+	
+	public KafkaApplyCardEntity assembleKafkaData(String currentDate) {
 		KafkaApplyCardEntity apply  = new KafkaApplyCardEntity();
 		ProtocolEntity protocol = new ProtocolEntity();
-		protocol.setType("data_increment_data");
-		protocol.setVersion("1.0");
+		protocol.setType(myKafkaProducerConfig.getOtherParameter("protocol.type"));
+		protocol.setVersion(myKafkaProducerConfig.getOtherParameter("protocol.version"));
 		SchemaEntity schema = new SchemaEntity();
-		schema.setNamespace("datacenter.sfz.ins.opaincome");
-		schema.setTableName("hbs_trans_log_act");
+		schema.setNamespace(myKafkaProducerConfig.getOtherParameter("topic"));
+		schema.setTableName(myKafkaProducerConfig.getOtherParameter("tablename"));
 		apply.setProtocol(protocol);
 		apply.setSchema(schema);
 		apply.setTimestamp(System.currentTimeMillis());

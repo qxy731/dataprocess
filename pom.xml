@@ -27,6 +27,8 @@
         <spark.version>2.3.0</spark.version>
         <scala.binary.version>2.11</scala.binary.version>
         <maven-jar-plugin.version>3.0.0</maven-jar-plugin.version>
+        <!-- <akka-core.version>2.6.0-M5</akka-core.version>
+        <akka-http.version>10.1.9</akka-http.version> -->
 	</properties>
 	
 	<repositories>
@@ -269,6 +271,16 @@
 		   <groupId>com.jayway.jsonpath</groupId>
 		   <artifactId>json-path</artifactId>
 		</dependency>
+		
+		<!-- <dependency>
+			<groupId>com.typesafe.akka</groupId>
+			<artifactId>akka-cluster-tools_${scala.binary.version}</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.typesafe.akka</groupId>
+			<artifactId>akka-http_${scala.binary.version}</artifactId>
+		</dependency> -->
 	</dependencies>
 
 	<dependencyManagement>

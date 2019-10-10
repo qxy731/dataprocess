@@ -23,8 +23,7 @@ public class RowkeyGenerator {
 	
 	public static RowkeyGenerator getInstance(String currentDate) {
 		sequence++;
-    	long currentTimestamp = System.currentTimeMillis();
-    	rowkey = currentDate.replaceAll("-", "")+sequence+"|"+String.valueOf(currentTimestamp);
+    	rowkey = currentDate.replaceAll("-", "")+sequence+"|"+String.valueOf(System.currentTimeMillis());
 		return instance;
 	}
 	

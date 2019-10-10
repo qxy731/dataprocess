@@ -1,11 +1,16 @@
 package com.myboot.dataprocess.kafka;
 
-import org.springframework.stereotype.Component;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
-import com.myboot.dataprocess.model.KafkaApplyCardEntity;
+import com.google.gson.reflect.TypeToken;
 
-import jline.internal.Log;
+import lombok.extern.slf4j.Slf4j;
 
 /** 
 *
@@ -14,17 +19,37 @@ import jline.internal.Log;
 * @author ：PeterQi
 *
 */
-@Component
+@Slf4j
+@Service
 public class MyKafkaCustermerServiceImpl  implements MyKafkaCustermerService {
 	
-	/*@KafkaListener(topics = {"datacenter.sfz.ins.opaincome"})*/
+	@SuppressWarnings("unchecked")
+	/*@KafkaListener(topics = {"${kafka.other.topic}"})*/
     public void listener(String content) {
-        Log.info("==================MyKafkaCustermer listener start=========================");
-        System.out.println(content);
+        log.info("==================MyKafkaCustermer listener start=========================");
+        //System.out.println(content);
         Gson gson = new Gson();
-        KafkaApplyCardEntity entity = gson.fromJson(content, KafkaApplyCardEntity.class);
-        System.out.println(entity);
-        Log.info("==================MyKafkaCustermer listener end =========================");
+        /*KafkaApplyCardEntity entity = gson.fromJson(content, KafkaApplyCardEntity.class);
+        System.out.println(entity); */
+        Map<String,Object> map = gson.fromJson(content, new TypeToken<HashMap<String,Object>>(){}.getType());
+        if(map==null) {
+        	return;
+        }
+        Map<String,String> dataObject = (Map<String,String>)map.get("data");
+        if(dataObject==null) {
+        	return;
+        }
+        Set<Map.Entry<String, String>> set = dataObject.entrySet();
+        if(set==null) {
+        	return;
+        }
+        for(Map.Entry<String, String> entry : set) {
+        	String key = entry.getKey();
+        	String value = entry.getValue();
+        	System.out.println("key="+key+"&value="+value);
+        }
+        System.out.println(map);
+        log.info("==================MyKafkaCustermer listener end =========================");
     }
 
 }

@@ -207,6 +207,9 @@ public class HbaseProcessServiceImpl implements HbaseProcessService {
 		log.info("===================================================== method is end ===================================================== ");
 	}
 	
+	/**
+	 * 测试
+	 */
 	public void other() throws Exception {
 		log.info("===================================================== method is start ===================================================== ");
 		try {
